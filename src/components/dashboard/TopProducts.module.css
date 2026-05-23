@@ -1,0 +1,29 @@
+.wrapper {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+  animation-delay: 900ms;
+}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.title { font-size: var(--text-base); font-weight: var(--font-semibold); color: var(--text-primary); }
+.list { display: flex; flex-direction: column; gap: 2px; max-height: 420px; overflow-y: auto; }
+.row {
+  display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md);
+  transition: background 200ms var(--ease-default);
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+.row:hover { background: rgba(255,255,255,0.03); }
+.rank { width: 24px; font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-muted); text-align: center; flex-shrink: 0; }
+.productInfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.productName { font-size: var(--text-sm); color: var(--text-primary); font-weight: var(--font-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.productMeta { display: flex; align-items: center; gap: var(--space-2); }
+.category { font-size: 10px; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 1px 8px; border-radius: var(--radius-full); }
+.sales { font-size: 10px; color: var(--text-muted); }
+.bar { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.05); margin-top: 2px; }
+.barFill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #6366f1, #8b5cf6); transition: width 1.2s var(--ease-out); }
+.rightCol { flex-shrink: 0; text-align: right; display: flex; flex-direction: column; gap: 2px; }
+.revenue { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.growthUp { display: flex; align-items: center; gap: 2px; font-size: 11px; font-weight: var(--font-medium); color: var(--color-success); justify-content: flex-end; }
+.growthDown { display: flex; align-items: center; gap: 2px; font-size: 11px; font-weight: var(--font-medium); color: var(--color-danger); justify-content: flex-end; }

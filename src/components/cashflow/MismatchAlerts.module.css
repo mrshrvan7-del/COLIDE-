@@ -1,0 +1,34 @@
+.wrapper {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); padding: var(--space-5);
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both; animation-delay: 700ms;
+}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.title { font-size: var(--text-base); font-weight: var(--font-semibold); color: var(--text-primary); display: flex; align-items: center; gap: var(--space-2); }
+.count { font-size: var(--text-xs); color: var(--text-muted); background: rgba(239,68,68,0.1); padding: 2px 10px; border-radius: var(--radius-full); color: var(--color-danger-light); }
+.list { display: flex; flex-direction: column; gap: var(--space-3); max-height: 460px; overflow-y: auto; }
+.alert {
+  border-left: 3px solid; padding: var(--space-4); border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.02); transition: background 200ms;
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+.alert:hover { background: rgba(255,255,255,0.04); }
+.alertHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
+.branchName { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.date { font-size: var(--text-xs); color: var(--text-muted); }
+.amounts { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
+.amountItem { display: flex; flex-direction: column; gap: 2px; }
+.amountLabel { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.amountValue { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.amountDivider { color: var(--text-muted); font-size: var(--text-sm); }
+.mismatchValue { font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--color-danger); }
+.description { font-size: var(--text-xs); color: var(--text-tertiary); line-height: 1.5; margin-bottom: var(--space-3); }
+.alertFooter { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.statusBadge, .severityBadge { font-size: 10px; font-weight: var(--font-semibold); padding: 2px 10px; border-radius: var(--radius-full); border: 1px solid; text-transform: uppercase; letter-spacing: 0.05em; }
+.actions { margin-left: auto; display: flex; gap: var(--space-2); }
+.actionBtn {
+  display: flex; align-items: center; gap: 4px; font-size: var(--text-xs); color: var(--text-secondary);
+  padding: 4px 10px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08);
+  background: transparent; cursor: pointer; transition: all 200ms;
+}
+.actionBtn:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }

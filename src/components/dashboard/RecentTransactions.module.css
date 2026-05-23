@@ -1,0 +1,28 @@
+.wrapper {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+  animation-delay: 800ms;
+}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.title { font-size: var(--text-base); font-weight: var(--font-semibold); color: var(--text-primary); }
+.viewAll { font-size: var(--text-xs); color: var(--accent-primary-light); font-weight: var(--font-medium); cursor: pointer; background: none; border: none; }
+.viewAll:hover { text-decoration: underline; }
+.list { display: flex; flex-direction: column; gap: 2px; max-height: 420px; overflow-y: auto; }
+.row {
+  display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md);
+  transition: background 200ms var(--ease-default);
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+.row:hover { background: rgba(255,255,255,0.03); }
+.iconWrap { width: 36px; height: 36px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-secondary); }
+.info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.desc { font-size: var(--text-sm); color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.meta { display: flex; align-items: center; gap: var(--space-2); }
+.branch { font-size: var(--text-xs); color: var(--accent-primary-light); background: rgba(99,102,241,0.1); padding: 1px 8px; border-radius: var(--radius-full); }
+.time { font-size: var(--text-xs); color: var(--text-muted); }
+.amountWrap { flex-shrink: 0; text-align: right; }
+.amountPos { display: flex; align-items: center; gap: 3px; font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-success); }
+.amountNeg { display: flex; align-items: center; gap: 3px; font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-danger); }
