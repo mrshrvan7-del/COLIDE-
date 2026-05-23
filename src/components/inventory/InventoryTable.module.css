@@ -1,0 +1,49 @@
+.wrapper {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); padding: var(--space-5);
+  animation: fadeInUp var(--duration-normal) var(--ease-out) both; animation-delay: 400ms;
+}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5); }
+.title { font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--text-primary); display: flex; align-items: center; gap: var(--space-2); }
+.iconBox { color: #06b6d4; }
+
+.actions { display: flex; align-items: center; gap: var(--space-3); }
+.searchBox { display: flex; align-items: center; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 6px 12px; }
+.iconSearch { color: var(--text-muted); margin-right: 8px; }
+.input { background: transparent; border: none; color: var(--text-primary); font-size: var(--text-sm); outline: none; width: 200px; }
+.input::placeholder { color: var(--text-muted); }
+
+.btnFilter { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); padding: 6px 12px; border-radius: var(--radius-md); font-size: var(--text-sm); cursor: pointer; transition: all 200ms; }
+.btnFilter:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+
+.tableContainer { width: 100%; overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; text-align: left; }
+.thProduct, .thStock, .thBranch, .thPrice { padding: var(--space-3); font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: var(--font-semibold); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.thBranch { text-align: center; }
+.thPrice { text-align: right; }
+
+.tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 200ms; }
+.tr:hover { background: rgba(255,255,255,0.02); }
+
+.tdProduct, .tdStock, .tdBranch, .tdPrice { padding: var(--space-3); vertical-align: middle; }
+
+.productInfo { display: flex; flex-direction: column; }
+.productName { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.productSku { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+
+.stockWrap { display: flex; align-items: center; }
+.totalStockBadge { font-size: var(--text-xs); font-weight: var(--font-bold); padding: 2px 8px; border-radius: var(--radius-full); }
+.badgeSuccess { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+.badgeWarning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+.badgeDanger { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.tdBranch { text-align: center; }
+.branchQty { font-size: var(--text-sm); font-weight: var(--font-medium); }
+.textSuccess { color: var(--text-primary); }
+.textWarning { color: #f59e0b; }
+.textDanger { color: #ef4444; }
+
+.tdPrice { text-align: right; }
+.priceInfo { display: flex; flex-direction: column; align-items: flex-end; }
+.sellPrice { font-size: var(--text-sm); font-weight: var(--font-bold); color: #10b981; }
+.costPrice { font-size: 10px; color: var(--text-muted); margin-top: 2px; text-decoration: line-through; opacity: 0.7; }

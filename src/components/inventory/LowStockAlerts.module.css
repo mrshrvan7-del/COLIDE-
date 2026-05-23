@@ -1,0 +1,27 @@
+.wrapper { margin-bottom: var(--space-6); animation: fadeInUp var(--duration-normal) var(--ease-out) both; }
+.title { font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--text-primary); display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
+.iconWarning { color: #f59e0b; }
+
+.list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); }
+
+.alertCard {
+  background: rgba(255,255,255,0.02); border-left: 4px solid; border-radius: var(--radius-md);
+  padding: var(--space-4); display: flex; flex-direction: column;
+}
+.warning { border-left-color: #f59e0b; }
+.critical { border-left-color: #ef4444; }
+
+.cardHeader { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-3); gap: var(--space-2); }
+.productName { font-size: var(--text-base); font-weight: var(--font-semibold); color: var(--text-primary); }
+.badge { font-size: 10px; font-weight: var(--font-bold); text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-full); white-space: nowrap; }
+.warning .badge { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+.critical .badge { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.stockInfo { display: flex; gap: var(--space-4); margin-bottom: var(--space-3); }
+.stockItem { display: flex; flex-direction: column; }
+.stockLabel { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+.stockValue { font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--text-primary); }
+
+.movementText { font-size: var(--text-xs); color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
+.warning .movementText { color: #f59e0b; }
+.critical .movementText { color: #ef4444; }

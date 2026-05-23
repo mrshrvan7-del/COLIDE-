@@ -1,0 +1,53 @@
+.wrapper {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); padding: var(--space-5);
+  animation: fadeInUp var(--duration-normal) var(--ease-out) both; animation-delay: 200ms;
+}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.title { font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--text-primary); }
+.payoutSummary { display: flex; align-items: center; gap: var(--space-2); background: rgba(16, 185, 129, 0.1); padding: 8px 16px; border-radius: var(--radius-lg); border: 1px solid rgba(16, 185, 129, 0.2); }
+.payoutLabel { font-size: var(--text-sm); color: var(--text-secondary); }
+.payoutValue { font-size: var(--text-lg); font-weight: var(--font-bold); color: #10b981; }
+
+.hierarchyList { display: flex; flex-direction: column; gap: var(--space-3); }
+.branchGroup { background: rgba(0,0,0,0.2); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+
+.managerRow { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); cursor: pointer; transition: background 200ms; user-select: none; }
+.managerRow:hover { background: rgba(255,255,255,0.05); }
+
+.managerInfo { display: flex; align-items: center; gap: var(--space-3); color: var(--text-secondary); }
+.managerAvatar { width: 32px; height: 32px; border-radius: var(--radius-full); background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-primary); }
+.managerDetails { display: flex; flex-direction: column; }
+.managerName { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.managerRole { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.branchStats { font-size: var(--text-xs); color: var(--text-secondary); background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: var(--radius-full); }
+
+.employeeList { padding: var(--space-4); padding-left: 56px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: var(--space-3); background: rgba(255,255,255,0.01); }
+.employeeCard { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); padding: var(--space-4); }
+.empHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
+.empName { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--text-primary); }
+.empLevel { font-size: 10px; color: var(--text-tertiary); background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: var(--radius-sm); text-transform: uppercase; }
+
+.eligibilityList { display: flex; flex-direction: column; gap: var(--space-3); }
+.eligRow { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.eligDetails { display: flex; flex-direction: column; min-width: 200px; }
+.schemeName { font-size: var(--text-xs); color: var(--text-secondary); margin-bottom: 4px; }
+
+.statusEligible, .statusPending { display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: var(--font-semibold); }
+.statusEligible { color: #10b981; }
+.statusPending { color: #f59e0b; }
+
+.progressContainer { flex: 1; display: flex; align-items: center; gap: var(--space-3); }
+.progressBar { flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: var(--radius-full); overflow: hidden; }
+.progressFill { height: 100%; border-radius: var(--radius-full); transition: width 1s ease-out; }
+.progressText { font-size: 10px; color: var(--text-muted); min-width: 60px; text-align: right; }
+
+.noData { font-size: var(--text-xs); color: var(--text-muted); font-style: italic; }
+
+@media (max-width: 768px) {
+  .header { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+  .employeeList { padding-left: var(--space-2); }
+  .eligRow { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .progressContainer { width: 100%; }
+}

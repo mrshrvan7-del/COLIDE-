@@ -13,6 +13,10 @@ import type {
   Alert,
   Badge,
   BranchPerformance,
+  Product,
+  StockTransfer,
+  IncentiveScheme,
+  IncentiveEligibility,
 } from '@/lib/types';
 
 // ─── Branches ─────────────────────────────────────────────────
@@ -455,3 +459,40 @@ export function getTotalRevenue(): number {
 export function getActiveBranchCount(): number {
   return branches.filter((b) => b.status === 'active').length;
 }
+
+// ─── Inventory Data ───────────────────────────────────────────
+
+export const products: Product[] = [
+  { id: 'p-01', name: 'Samsung Galaxy Buds2 Pro', category: 'Electronics', sku: 'SAM-BUD-01', price: 12500, cost: 9000, unit: 'pcs', totalStock: 145, branchStock: { 'br-001': 45, 'br-002': 20, 'br-003': 50, 'br-004': 10, 'br-005': 20, 'br-006': 0 }, reorderLevel: 30, status: 'in_stock', movementRate: 'fast', lastRestocked: '2026-05-10T10:00:00Z' },
+  { id: 'p-02', name: 'Nike Air Max 270', category: 'Footwear', sku: 'NIK-AM-270', price: 12000, cost: 7500, unit: 'pair', totalStock: 85, branchStock: { 'br-001': 25, 'br-002': 15, 'br-003': 30, 'br-004': 5, 'br-005': 10, 'br-006': 0 }, reorderLevel: 20, status: 'in_stock', movementRate: 'fast', lastRestocked: '2026-05-12T14:30:00Z' },
+  { id: 'p-03', name: 'Levis 511 Slim Jeans', category: 'Clothing', sku: 'LEV-511', price: 4000, cost: 1800, unit: 'pcs', totalStock: 210, branchStock: { 'br-001': 60, 'br-002': 40, 'br-003': 50, 'br-004': 30, 'br-005': 20, 'br-006': 10 }, reorderLevel: 50, status: 'in_stock', movementRate: 'medium', lastRestocked: '2026-04-28T09:15:00Z' },
+  { id: 'p-04', name: 'JBL Flip 6 Speaker', category: 'Electronics', sku: 'JBL-FL6', price: 9000, cost: 6200, unit: 'pcs', totalStock: 18, branchStock: { 'br-001': 5, 'br-002': 2, 'br-003': 8, 'br-004': 0, 'br-005': 3, 'br-006': 0 }, reorderLevel: 25, status: 'low_stock', movementRate: 'fast', lastRestocked: '2026-04-15T11:45:00Z' },
+  { id: 'p-05', name: 'Prestige Pressure Cooker', category: 'Home & Kitchen', sku: 'PRE-PC-5L', price: 3500, cost: 2100, unit: 'pcs', totalStock: 42, branchStock: { 'br-001': 10, 'br-002': 8, 'br-003': 12, 'br-004': 5, 'br-005': 7, 'br-006': 0 }, reorderLevel: 15, status: 'in_stock', movementRate: 'medium', lastRestocked: '2026-05-01T16:20:00Z' },
+  { id: 'p-06', name: 'Amul Butter 500g', category: 'Groceries', sku: 'AMU-BUT-500', price: 500, cost: 420, unit: 'pcs', totalStock: 320, branchStock: { 'br-001': 80, 'br-002': 60, 'br-003': 90, 'br-004': 40, 'br-005': 50, 'br-006': 0 }, reorderLevel: 100, status: 'in_stock', movementRate: 'fast', lastRestocked: '2026-05-20T08:00:00Z' },
+  { id: 'p-07', name: 'Himalaya Face Wash', category: 'Beauty', sku: 'HIM-FW-150', price: 900, cost: 450, unit: 'pcs', totalStock: 15, branchStock: { 'br-001': 4, 'br-002': 2, 'br-003': 5, 'br-004': 1, 'br-005': 3, 'br-006': 0 }, reorderLevel: 30, status: 'low_stock', movementRate: 'fast', lastRestocked: '2026-04-10T13:10:00Z' },
+  { id: 'p-08', name: 'Allen Solly Formal Shirt', category: 'Clothing', sku: 'ALL-FS-01', price: 3500, cost: 1400, unit: 'pcs', totalStock: 150, branchStock: { 'br-001': 40, 'br-002': 30, 'br-003': 35, 'br-004': 20, 'br-005': 25, 'br-006': 0 }, reorderLevel: 40, status: 'in_stock', movementRate: 'slow', lastRestocked: '2026-03-15T10:30:00Z' },
+];
+
+export const stockTransfers: StockTransfer[] = [
+  { id: 'st-001', fromBranchId: 'br-003', fromBranchName: 'Colide Metro', toBranchId: 'br-004', toBranchName: 'Colide Mall', productId: 'p-04', productName: 'JBL Flip 6 Speaker', quantity: 5, status: 'suggested', reason: 'Colide Mall is out of stock, Metro has surplus.', createdAt: hoursAgo(12) },
+  { id: 'st-002', fromBranchId: 'br-001', fromBranchName: 'Colide Central', toBranchId: 'br-002', toBranchName: 'Colide Express', productId: 'p-07', productName: 'Himalaya Face Wash', quantity: 15, status: 'in_transit', reason: 'Restocking low inventory at Express branch.', createdAt: hoursAgo(24) },
+  { id: 'st-003', fromBranchId: 'br-005', fromBranchName: 'Colide Corner', toBranchId: 'br-006', toBranchName: 'Colide Mart', productId: 'p-08', productName: 'Allen Solly Formal Shirt', quantity: 10, status: 'approved', reason: 'Moving slow-moving stock to a different demographic.', createdAt: hoursAgo(4) },
+];
+
+// ─── Incentive Data ───────────────────────────────────────────
+
+export const incentiveSchemes: IncentiveScheme[] = [
+  { id: 'inc-001', name: 'Summer Sales Bonanza', type: 'commission', description: 'Earn 2% extra commission on all electronics sales above ₹1,00,000.', criteria: { minSalesAmount: 100000 }, amount: 2, isPercentage: true, isActive: true, startDate: '2026-05-01', endDate: '2026-05-31' },
+  { id: 'inc-002', name: 'Perfect Attendance Bonus', type: 'bonus', description: 'Flat ₹5000 bonus for 100% attendance and zero late mark-ins.', criteria: { minAttendance: 100 }, amount: 5000, isPercentage: false, isActive: true, startDate: '2026-05-01', endDate: '2026-05-31' },
+  { id: 'inc-003', name: 'Customer Delight Reward', type: 'reward', description: 'Win a free weekend getaway for maintaining a 4.9+ rating with at least 50 reviews.', criteria: { minCustomerRating: 4.9 }, amount: 15000, isPercentage: false, isActive: true, startDate: '2026-04-01', endDate: '2026-06-30' },
+  { id: 'inc-004', name: 'Manager Acceleration', type: 'promotion', description: 'Path to Lead Salesperson. Achieve 150% target for 3 consecutive months.', criteria: { minTargetAchieved: 150, minConsecutiveMonths: 3 }, amount: 10000, isPercentage: false, isActive: true, startDate: '2026-01-01', endDate: '2026-12-31' },
+];
+
+export const incentiveEligibilities: IncentiveEligibility[] = [
+  { employeeId: 'emp-001', employeeName: 'Ravi Kumar', schemeId: 'inc-001', schemeName: 'Summer Sales Bonanza', currentProgress: 425000, targetProgress: 100000, estimatedAmount: 8500, isEligible: true },
+  { employeeId: 'emp-001', employeeName: 'Ravi Kumar', schemeId: 'inc-003', schemeName: 'Customer Delight Reward', currentProgress: 4.9, targetProgress: 4.9, estimatedAmount: 15000, isEligible: true },
+  { employeeId: 'emp-002', employeeName: 'Ananya Iyer', schemeId: 'inc-001', schemeName: 'Summer Sales Bonanza', currentProgress: 380000, targetProgress: 100000, estimatedAmount: 7600, isEligible: true },
+  { employeeId: 'emp-003', employeeName: 'Deepak Singh', schemeId: 'inc-002', schemeName: 'Perfect Attendance Bonus', currentProgress: 94, targetProgress: 100, estimatedAmount: 0, isEligible: false },
+  { employeeId: 'emp-004', employeeName: 'Meera Nair', schemeId: 'inc-004', schemeName: 'Manager Acceleration', currentProgress: 115, targetProgress: 150, estimatedAmount: 0, isEligible: false },
+  { employeeId: 'emp-006', employeeName: 'Hrishitha', schemeId: 'inc-001', schemeName: 'Summer Sales Bonanza', currentProgress: 95000, targetProgress: 100000, estimatedAmount: 0, isEligible: false },
+];
