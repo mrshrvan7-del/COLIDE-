@@ -1,0 +1,34 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.generatorSection {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 1200px) {
+  .generatorSection {
+    position: static;
+  }
+}
+
+.historySection {
+  flex: 1;
+}

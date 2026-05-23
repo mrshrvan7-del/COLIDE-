@@ -18,7 +18,10 @@ import type {
   IncentiveScheme,
   IncentiveEligibility,
   Bill,
-  ChatMessage
+  ChatMessage,
+  SalesDataPoint,
+  Report,
+  Anomaly
 } from '@/lib/types';
 
 // ─── Branches ─────────────────────────────────────────────────
@@ -595,3 +598,190 @@ export const chatMessages: ChatMessage[] = [
     isActionable: true
   }
 ];
+
+// ─── Sales Forecasting & Reports (Phase 4) ────────────────────
+
+export function generateForecastingData(): SalesDataPoint[] {
+  const data: SalesDataPoint[] = [];
+  // Generate data from 20 days ago to 10 days in the future
+  for (let i = -20; i <= 10; i++) {
+    const date = new Date(now);
+    date.setDate(date.getDate() + i);
+    const dateStr = date.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+    
+    // Base pattern: weekday vs weekend variance + upward trend
+    const dayOfWeek = date.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const baseVal = 420000 + (i + 20) * 8000; // growing trend
+    const variance = isWeekend ? baseVal * 0.22 : -baseVal * 0.08;
+    const randomNoise = (Math.random() - 0.5) * 20000;
+    const actualVal = Math.round(baseVal + variance + randomNoise);
+
+    if (i <= 0) {
+      // Historical: we have actual data, and a predicted overlap
+      data.push({
+        date: dateStr,
+        actual: actualVal,
+        predicted: Math.round(actualVal * (0.97 + Math.random() * 0.06)), // close to actual
+      });
+    } else {
+      // Future: prediction only (actual is 0)
+      const predictedVal = Math.round(baseVal + variance * 0.85); // slightly smoothed
+      const uncertainty = i * 15000; // bounds widen as we look further into the future
+      data.push({
+        date: dateStr,
+        actual: 0,
+        predicted: predictedVal,
+        lowerBound: Math.round(predictedVal - 25000 - uncertainty),
+        upperBound: Math.round(predictedVal + 25000 + uncertainty),
+      });
+    }
+  }
+  return data;
+}
+
+export const salesForecastingData = generateForecastingData();
+
+export const mockReports: Report[] = [
+  {
+    id: 'rep-001',
+    type: 'gst',
+    title: 'Q1 GST Filing Report',
+    description: 'Consolidated GST report for all active branches for Q1 FY 2026-27.',
+    dateRange: { start: '2026-04-01', end: '2026-06-30' },
+    generatedAt: daysAgo(2),
+    format: 'pdf',
+    downloadUrl: '#',
+  },
+  {
+    id: 'rep-002',
+    type: 'sales',
+    title: 'Monthly Sales Analytics - April 2026',
+    description: 'Detailed branch-wise sales breakdown, itemized transactions, and category trends.',
+    dateRange: { start: '2026-04-01', end: '2026-04-30' },
+    generatedAt: daysAgo(5),
+    format: 'excel',
+    downloadUrl: '#',
+  },
+  {
+    id: 'rep-003',
+    type: 'payroll',
+    title: 'Staff Payroll & Incentives - May 2026',
+    description: 'Consolidated employee payouts, base salaries, unlocked commissions, and attendance records.',
+    dateRange: { start: '2026-05-01', end: '2026-05-31' },
+    generatedAt: daysAgo(1),
+    format: 'pdf',
+    downloadUrl: '#',
+  },
+  {
+    id: 'rep-004',
+    type: 'inventory',
+    title: 'Dead Stock & Reorder Report',
+    description: 'Inventory audit focusing on items below reorder level and low-velocity products.',
+    dateRange: { start: '2026-05-01', end: '2026-05-24' },
+    generatedAt: hoursAgo(4),
+    format: 'csv',
+    downloadUrl: '#',
+  },
+];
+
+export const mockAnomalies: Anomaly[] = [
+  {
+    id: 'anom-001',
+    branchId: 'br-004',
+    branchName: 'Colide Mall',
+    employeeId: 'emp-008',
+    employeeName: 'Divya Menon',
+    type: 'suspicious_refund',
+    severity: 'critical',
+    title: 'High Refund-to-Sale Ratio',
+    description: 'Divya processed 12 refunds today totaling ₹14,200, which constitutes 85% of her total sales volume.',
+    evidence: [
+      'Refund count: 12 (Branch average: 0.8)',
+      'Total refund value: ₹14,200',
+      'No customer signatures found on 9 receipt uploads',
+      'Timestamp clustering: 4 refunds processed within 15 minutes during shift closing'
+    ],
+    riskScore: 92,
+    detectedAt: hoursAgo(1.5),
+    status: 'detected',
+  },
+  {
+    id: 'anom-002',
+    branchId: 'br-001',
+    branchName: 'Colide Central',
+    employeeId: 'emp-001',
+    employeeName: 'Ravi Kumar',
+    type: 'unusual_discount',
+    severity: 'warning',
+    title: 'Max Discount Limit Override',
+    description: 'Ravi applied a manual 40% discount on a Samsung Galaxy Buds2 Pro without manager credentials.',
+    evidence: [
+      'Discount Applied: 40% (Policy limit: 15% without manager override)',
+      'SKU: SAM-BUD-01 (Buds2 Pro)',
+      'Approval Method: Bypass token code exploited',
+      'Customer: Self/Relative suspected'
+    ],
+    riskScore: 68,
+    detectedAt: hoursAgo(8),
+    status: 'investigating',
+  },
+  {
+    id: 'anom-003',
+    branchId: 'br-003',
+    branchName: 'Colide Metro',
+    type: 'fake_bill',
+    severity: 'danger',
+    title: 'Duplicate Vendor Invoice Scan',
+    description: 'An invoice from QuickFix Electricals matches a previously processed invoice from last month.',
+    evidence: [
+      'Invoice Match: 99.8% pixel overlay similarity',
+      'Amount: ₹4,500',
+      'Original Scan Date: 2026-04-20 (Processed)',
+      'Second Scan Date: 2026-05-22 (Flagged)'
+    ],
+    riskScore: 84,
+    detectedAt: daysAgo(1),
+    status: 'detected',
+  },
+  {
+    id: 'anom-004',
+    branchId: 'br-002',
+    branchName: 'Colide Express',
+    employeeId: 'emp-004',
+    employeeName: 'Meera Nair',
+    type: 'manipulation',
+    severity: 'warning',
+    title: 'Remote Clock-In Coordinates',
+    description: 'Attendance clock-in coordinate mismatch. GPS location was 2.5km away from Connaught Place branch.',
+    evidence: [
+      'Clock-in GPS: 28.6139° N, 77.2090° E',
+      'Branch GPS: 28.6315° N, 77.2167° E',
+      'Distance discrepancy: 2.45 kilometers',
+      'Device IP: Mobile network gateway'
+    ],
+    riskScore: 55,
+    detectedAt: daysAgo(2),
+    status: 'resolved',
+  },
+  {
+    id: 'anom-005',
+    branchId: 'br-006',
+    branchName: 'Colide Mart',
+    type: 'cash_mismatch',
+    severity: 'danger',
+    title: 'Unreconciled Cash Drawer Balance',
+    description: 'Closing audit report indicates ₹6,800 cash shortage in register 1 drawer.',
+    evidence: [
+      'Expected Cash: ₹15,000',
+      'Actual Cash counted: ₹8,200',
+      'Difference: -₹6,800',
+      'Manager in charge: Sneha Patil'
+    ],
+    riskScore: 78,
+    detectedAt: daysAgo(3),
+    status: 'investigating',
+  }
+];
+
+
