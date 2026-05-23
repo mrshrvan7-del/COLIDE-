@@ -6,17 +6,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-6);
-  border-bottom: var(--border-default);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   z-index: var(--z-sticky);
-  background: rgba(10, 10, 15, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #0a0a0f; /* Match design system background exactly (fully opaque) */
   transition: var(--transition-all);
   gap: var(--space-4);
 }
 
 .header.scrolled {
-  background: rgba(10, 10, 15, 0.85);
+  background: #06060a;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow-md);
 }
 
@@ -63,9 +62,9 @@
 .searchInput {
   width: 100%;
   padding: 10px 16px 10px 42px;
-  background: var(--glass-bg);
-  border: var(--border-default);
-  border-radius: var(--radius-full);
+  background: #11111d; /* Solid dark background to prevent content showing underneath */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md); /* Clean blocky SaaS border-radius */
   color: var(--text-primary);
   font-size: var(--text-sm);
   transition: var(--transition-all);
@@ -76,9 +75,9 @@
 }
 
 .searchInput:focus {
-  background: var(--glass-bg-hover);
+  background: #151525;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .searchInput:focus ~ .searchIcon {

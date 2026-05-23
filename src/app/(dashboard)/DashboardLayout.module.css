@@ -13,6 +13,11 @@
   min-height: 100vh;
 }
 
+/* Dynamically adjust margin-left of the main layout when the sidebar is collapsed */
+.appLayout:has(aside[class*="collapsed"]) .mainArea {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
 .content {
   flex: 1;
   padding: var(--space-6);
