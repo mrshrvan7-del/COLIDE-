@@ -1,0 +1,17 @@
+.page { display: flex; flex-direction: column; gap: var(--space-6); }
+.kpiGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+
+.contentLayout { display: flex; flex-direction: column; }
+.mainContent { width: 100%; }
+
+.verificationSection { display: flex; flex-direction: column; gap: var(--space-4); }
+.backNav { display: flex; }
+.btnBack { background: transparent; border: none; color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--font-semibold); cursor: pointer; transition: color 200ms; }
+.btnBack:hover { color: var(--text-primary); }
+
+@media (max-width: 1200px) {
+  .kpiGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .kpiGrid { grid-template-columns: 1fr; }
+}

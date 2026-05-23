@@ -1,0 +1,15 @@
+.wrapper { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+.label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: var(--font-semibold); }
+.chipsContainer { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+.chip {
+  display: flex; align-items: center; gap: 6px; padding: 6px 12px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-full); font-size: var(--text-xs); color: var(--text-secondary);
+  cursor: pointer; transition: all 200ms;
+}
+.chip:hover {
+  background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);
+  color: var(--text-primary); transform: translateY(-2px);
+}
+.chip svg { color: #8b5cf6; }

@@ -17,6 +17,8 @@ import type {
   StockTransfer,
   IncentiveScheme,
   IncentiveEligibility,
+  Bill,
+  ChatMessage
 } from '@/lib/types';
 
 // ─── Branches ─────────────────────────────────────────────────
@@ -194,8 +196,15 @@ export const employees: Employee[] = [
 const now = new Date('2026-05-24T00:30:00+05:30');
 
 function hoursAgo(h: number): string {
-  const d = new Date(now.getTime() - h * 3600000);
+  const d = new Date();
+  d.setHours(d.getHours() - h);
   return d.toISOString();
+}
+
+function daysAgo(d: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() - d);
+  return date.toISOString();
 }
 
 export const recentTransactions: Transaction[] = [
@@ -495,4 +504,94 @@ export const incentiveEligibilities: IncentiveEligibility[] = [
   { employeeId: 'emp-003', employeeName: 'Deepak Singh', schemeId: 'inc-002', schemeName: 'Perfect Attendance Bonus', currentProgress: 94, targetProgress: 100, estimatedAmount: 0, isEligible: false },
   { employeeId: 'emp-004', employeeName: 'Meera Nair', schemeId: 'inc-004', schemeName: 'Manager Acceleration', currentProgress: 115, targetProgress: 150, estimatedAmount: 0, isEligible: false },
   { employeeId: 'emp-006', employeeName: 'Hrishitha', schemeId: 'inc-001', schemeName: 'Summer Sales Bonanza', currentProgress: 95000, targetProgress: 100000, estimatedAmount: 0, isEligible: false },
+];
+
+// ─── Bills Data ───────────────────────────────────────────────
+
+export const bills: Bill[] = [
+  {
+    id: 'bill-001',
+    branchId: 'br-001',
+    imageUrl: '/placeholder-bill-1.png',
+    vendor: 'Reliance Smart Wholesale',
+    amount: 14500,
+    gstAmount: 2610,
+    date: daysAgo(1),
+    items: [
+      { name: 'Office Supplies Bulk', quantity: 1, rate: 5000, amount: 5000, gst: 900 },
+      { name: 'Cleaning Materials', quantity: 5, rate: 1900, amount: 9500, gst: 1710 }
+    ],
+    category: 'Operations',
+    status: 'verified',
+    confidence: 0.98,
+    extractedAt: hoursAgo(24)
+  },
+  {
+    id: 'bill-002',
+    branchId: 'br-003',
+    imageUrl: '/placeholder-bill-2.png',
+    vendor: 'Cloud Hosting Tech Services',
+    amount: 12000,
+    gstAmount: 2160,
+    date: daysAgo(2),
+    items: [
+      { name: 'Annual Server Maintenance', quantity: 1, rate: 12000, amount: 12000, gst: 2160 }
+    ],
+    category: 'IT Infrastructure',
+    status: 'pending',
+    confidence: 0.85,
+    extractedAt: hoursAgo(2)
+  },
+  {
+    id: 'bill-003',
+    branchId: 'br-002',
+    imageUrl: '/placeholder-bill-3.png',
+    vendor: 'QuickFix Electricals',
+    amount: 4500,
+    gstAmount: 810,
+    date: daysAgo(5),
+    items: [
+      { name: 'AC Repair Service', quantity: 1, rate: 4500, amount: 4500, gst: 810 }
+    ],
+    category: 'Maintenance',
+    status: 'flagged',
+    confidence: 0.65,
+    extractedAt: hoursAgo(120)
+  }
+];
+
+// ─── AI Chat Messages ─────────────────────────────────────────
+
+export const chatMessages: ChatMessage[] = [
+  {
+    id: 'msg-001',
+    role: 'assistant',
+    content: "Hi there! I'm your Colide AI Assistant. I can analyze sales trends, find anomalies in bills, predict inventory shortages, or check employee performance. How can I help you today?",
+    timestamp: hoursAgo(1)
+  },
+  {
+    id: 'msg-002',
+    role: 'user',
+    content: 'Which branch is performing the worst this week?',
+    timestamp: hoursAgo(0.9)
+  },
+  {
+    id: 'msg-003',
+    role: 'assistant',
+    content: "Based on this week's data, **Colide Mall (br-004)** is underperforming. They have generated ₹2,10,000 in revenue, which is a 12% drop compared to last week. The main issue seems to be a significant drop in conversion rate (currently at 32%).",
+    timestamp: hoursAgo(0.9)
+  },
+  {
+    id: 'msg-004',
+    role: 'user',
+    content: 'Are there any low stock alerts I should worry about?',
+    timestamp: hoursAgo(0.5)
+  },
+  {
+    id: 'msg-005',
+    role: 'assistant',
+    content: "Yes. **JBL Flip 6 Speaker (p-04)** is running very low. You currently have 18 units across all branches. \n\nI suggest an immediate inter-branch transfer from **Colide Metro** (they have a surplus) to **Colide Mall** (where they are out of stock). Would you like me to draft this transfer?",
+    timestamp: hoursAgo(0.5),
+    isActionable: true
+  }
 ];
